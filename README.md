@@ -1,6 +1,9 @@
 # Lab01-ARSW
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
+### Integrantes:
+- Federico Barrios Meneses
+- Guillermo Alfonso Castro Camelo
 ## Ejercicio Introducción al paralelismo - Hilos - Caso BlackListSearch
 
 
