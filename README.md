@@ -3,7 +3,7 @@
 ### Arquitecturas de Software - ARSW
 ## Ejercicio Introducción al paralelismo - Hilos - Caso BlackListSearch
 
-##Integrantes:
+## Integrantes:
 - Federico Barrios Meneses
 - Guillermo Alfonso Castro Camelo
 
