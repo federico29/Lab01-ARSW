@@ -1,9 +1,6 @@
-# Lab01-ARSW
+
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
-### Integrantes:
-- Federico Barrios Meneses
-- Guillermo Alfonso Castro Camelo
 ## Ejercicio Introducción al paralelismo - Hilos - Caso BlackListSearch
 
 
@@ -87,3 +84,6 @@ Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tie
 2. Cómo se comporta la solución usando tantos hilos de procesamiento como núcleos comparado con el resultado de usar el doble de éste?.
 
 3. De acuerdo con lo anterior, si para este problema en lugar de 100 hilos en una sola CPU se pudiera usar 1 hilo en cada una de 100 máquinas hipotéticas, la ley de Amdahls se aplicaría mejor?. Si en lugar de esto se usaran c hilos en 100/c máquinas distribuidas (siendo c es el número de núcleos de dichas máquinas), se mejoraría?. Explique su respuesta.
+
+
+
