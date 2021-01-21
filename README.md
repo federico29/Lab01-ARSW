@@ -24,6 +24,17 @@
 	2. Inicie los tres hilos con 'start()'.
 	3. Ejecute y revise la salida por pantalla. 
 	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
+	> *Solución*
+	> la salida con
+	```bash
+	hilo1.start();
+	```
+	> es concurrente y se obtiene las tres listas al mismo tiempo y con 
+	```bash
+	hilo1.run();
+	```
+	> la salida no es concurrente y se obtienen los valores en orden al momento de llamarlos.
+# Respuesta
 
 **Parte II - Ejercicio Black List Search**
 
