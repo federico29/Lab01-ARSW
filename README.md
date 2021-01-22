@@ -26,11 +26,11 @@
 	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
 	> ### Solución
 	
-	> la salida con
-	```bash
+	> La salida con:
+	```java
 	hilo1.start();
 	```
-	> es concurrente y se obtiene las tres listas al mismo tiempo y con 
+	> Es concurrente y se obtiene las tres listas al mismo tiempo y con 
 	```bash
 	hilo1.run();
 	```
