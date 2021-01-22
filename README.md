@@ -31,7 +31,7 @@
 	hilo1.start();
 	```
 	> Es concurrente y se obtiene las tres listas al mismo tiempo y con 
-	```bash
+	```java
 	hilo1.run();
 	```
 	> la salida no es concurrente y se obtienen los valores en orden al momento de llamarlos.
