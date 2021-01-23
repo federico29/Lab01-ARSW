@@ -3,9 +3,6 @@
 ### Arquitecturas de Software - ARSW
 ## Ejercicio Introducción al paralelismo - Hilos - Caso BlackListSearch
 
-## Integrantes:
-- Federico Barrios Meneses
-- Guillermo Alfonso Castro Camelo
 
 ### Dependencias:
 ####   Lecturas:
@@ -24,18 +21,6 @@
 	2. Inicie los tres hilos con 'start()'.
 	3. Ejecute y revise la salida por pantalla. 
 	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
-	> ### Solución
-	
-	> La salida con:
-	```java
-	hilo1.start();
-	```
-	> Es concurrente y se obtiene las tres listas al mismo tiempo y con 
-	```java
-	hilo1.run();
-	```
-	> la salida no es concurrente y se obtienen los valores en orden al momento de llamarlos.
-# Respuesta
 
 **Parte II - Ejercicio Black List Search**
 
