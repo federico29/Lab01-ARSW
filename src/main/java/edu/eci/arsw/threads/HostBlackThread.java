@@ -37,6 +37,8 @@ public class HostBlackThread<checkHost> extends Thread {
         return ocurrencesCount;
     }
 
+    public int getCheckedListsCount(){ return checkedListsCount; }
+
     public LinkedList<Integer> getBlackListOcurrences() {
         return blackListOcurrences;
     }

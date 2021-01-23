@@ -39,8 +39,12 @@ public class HostBlackListsValidator {
 
         LinkedList<Integer> blackListOcurrences=new LinkedList<>();
 
+        LinkedList<HostBlackThread> hilos=new LinkedList<>();
+
+        LinkedList<Integer> blackListOcurrences2=new LinkedList<>();
 
         int ocurrencesCount;
+        int ocurrencesCount2=0;
 
         HostBlacklistsDataSourceFacade skds= HostBlacklistsDataSourceFacade.getInstance();
 
@@ -50,39 +54,39 @@ public class HostBlackListsValidator {
         int cont=0;
 
         for (int i=1;i<skds.getRegisteredServersCount()/1000;i++){
-
             HostBlackThread threadMini = new HostBlackThread(skds, cont, cont+num, ipaddress);
+            hilos.add(threadMini);
+            cont=cont+num;
+        }
 
-            threadMini.start();
+        for(HostBlackThread hilo:hilos){
+            hilo.start();
+        }
+
+        for(HostBlackThread hilo:hilos){
             try {
-                threadMini.join();
+                hilo.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(cont);
-            System.out.println(skds.getRegisteredServersCount()/1000);
-            ocurrencesCount = threadMini.getOcurrencesCount();
-            blackListOcurrences = threadMini.getBlackListOcurrences();
-            if (blackListOcurrences!=null){
-                ocurrencesCount+=blackListOcurrences.size();
-
+            ocurrencesCount = hilo.getOcurrencesCount();
+            checkedListsCount+=hilo.getCheckedListsCount();
+            ocurrencesCount2+=ocurrencesCount;
+            blackListOcurrences = hilo.getBlackListOcurrences();
+            for(Integer index:blackListOcurrences){
+                blackListOcurrences2.add(index);
             }
-            if (ocurrencesCount>=BLACK_LIST_ALARM_COUNT){
-                skds.reportAsNotTrustworthy(ipaddress);
+            if (ocurrencesCount2>=BLACK_LIST_ALARM_COUNT){
                 break;
             }
-            else{
-                skds.reportAsTrustworthy(ipaddress);
-            }
-
-            LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
-            cont=cont+num;
-            System.out.println(blackListOcurrences);
-            System.out.println(ocurrencesCount);
-
-
         }
-
+        if (ocurrencesCount2>=BLACK_LIST_ALARM_COUNT){
+            skds.reportAsNotTrustworthy(ipaddress);
+        }
+        else{
+            skds.reportAsTrustworthy(ipaddress);
+        }
+        LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
         /*HostBlackThread threadMini = new HostBlackThread(skds, 0, 8000, ipaddress);
 
         threadMini.start();
@@ -116,7 +120,7 @@ public class HostBlackListsValidator {
 
         LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
 */
-        return blackListOcurrences;
+        return blackListOcurrences2;
     }
 
 
