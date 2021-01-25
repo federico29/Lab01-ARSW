@@ -229,61 +229,60 @@ public class HostBlackListThread<checkHost> extends Thread {
 * @return  Blacklists numbers where the given host's IP address was found.
 */
 public List<Integer> checkHost(String ipaddress,int n){
+	HostBlacklistsDataSourceFacade skds = HostBlacklistsDataSourceFacade.getInstance();
 
-HostBlacklistsDataSourceFacade skds = HostBlacklistsDataSourceFacade.getInstance();
+	LinkedList<Integer> blackListOccurrences;
+	LinkedList<Integer> globalBlackListOccurrences = new LinkedList<>();
+	LinkedList<HostBlackListThread> threads = new LinkedList<>();
 
-LinkedList<Integer> blackListOccurrences;
-LinkedList<Integer> globalBlackListOccurrences = new LinkedList<>();
-LinkedList<HostBlackListThread> threads = new LinkedList<>();
+	int globalOccurrencesCount = 0;
+	int checkedListsCount = 0;
+	int serversNumber = skds.getRegisteredServersCount()/n;
+	int cont = 0;
 
-int globalOccurrencesCount = 0;
-int checkedListsCount = 0;
-int serversNumber = skds.getRegisteredServersCount()/n;
-int cont = 0;
-
-for (int i = 0; i < n; i++){
-    threads.add(new HostBlackListThread(skds, cont, cont + serversNumber, ipaddress));
-    cont = cont + serversNumber;
-}
-
-for(HostBlackListThread hilo : threads){
-    hilo.start();
-}
-
-for(HostBlackListThread hilo : threads){
-    try {
-	hilo.join();
-    } catch (InterruptedException e) {
-	e.printStackTrace();
-    }
-    if (globalOccurrencesCount < BLACK_LIST_ALARM_COUNT){
-	globalOccurrencesCount = globalOccurrencesCount + hilo.getOccurrencesCount();
-	checkedListsCount= checkedListsCount + hilo.getCheckedListsCount();
-	blackListOccurrences = hilo.getBlackListOccurrences();
-	for(Integer hostList : blackListOccurrences){
-	    globalBlackListOccurrences.add(hostList);
+	for (int i = 0; i < n; i++){
+	    threads.add(new HostBlackListThread(skds, cont, cont + serversNumber, ipaddress));
+	    cont = cont + serversNumber;
 	}
-    }else{
-	break;
-    }
-}
 
-if (globalOccurrencesCount >= BLACK_LIST_ALARM_COUNT){
-    skds.reportAsNotTrustworthy(ipaddress);
-}
-else{
-    skds.reportAsTrustworthy(ipaddress);
-}
+	for(HostBlackListThread hilo : threads){
+	    hilo.start();
+	}
 
-LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
+	for(HostBlackListThread hilo : threads){
+	    try {
+		hilo.join();
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    }
+	    if (globalOccurrencesCount < BLACK_LIST_ALARM_COUNT){
+		globalOccurrencesCount = globalOccurrencesCount + hilo.getOccurrencesCount();
+		checkedListsCount= checkedListsCount + hilo.getCheckedListsCount();
+		blackListOccurrences = hilo.getBlackListOccurrences();
+		for(Integer hostList : blackListOccurrences){
+		    globalBlackListOccurrences.add(hostList);
+		}
+	    }else{
+		break;
+	    }
+	}
 
-return globalBlackListOccurrences;
+	if (globalOccurrencesCount >= BLACK_LIST_ALARM_COUNT){
+	    skds.reportAsNotTrustworthy(ipaddress);
+	}
+	else{
+	    skds.reportAsTrustworthy(ipaddress);
+	}
+
+	LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
+
+	return globalBlackListOccurrences;
 }
 ```
 
-	* Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
+* Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
 
-	* Se sabe que el HOST 202.24.34.55 está reportado en listas negras de una forma más dispersa, y que el host 212.24.24.55 NO está en ninguna lista negra.
+* Se sabe que el HOST 202.24.34.55 está reportado en listas negras de una forma más dispersa, y que el host 212.24.24.55 NO está en ninguna lista negra.
 
 
 **Parte II.I Para discutir la próxima clase (NO para implementar aún)**
