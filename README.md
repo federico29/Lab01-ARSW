@@ -293,9 +293,11 @@ public List<Integer> checkHost(String ipaddress,int n){
 * Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
 
 Teniendo en cuenta lo apreciado en la imagen, podemos concluir que en la búsqueda del host 200.24.34.55, que es un host poco disperso, se tuvo que revisar un número reducido de listas.
+
 ![](img/parte%202%20punto%202%20ip%20menos%20dispersa.PNG)
 
 Por el contrario, para buscar el host 202.24.34.55, que está reportado de una manera más dispersa en las listas, se tuvo que revisar un número bastante elevado de listas.
+
 ![](img/parte%202%20punto%202%20ip%20mas%20dispersa.PNG)
 
 * Se sabe que el HOST 202.24.34.55 está reportado en listas negras de una forma más dispersa, y que el host 212.24.24.55 NO está en ninguna lista negra.
@@ -303,12 +305,15 @@ Por el contrario, para buscar el host 202.24.34.55, que está reportado de una m
 ![](img/parte%202%20punto%202%20ip%20mas%20dispersa.PNG)
 
 Para buscar el host 212.24.24.55, se revisaron todas las listas ya que no existe en ninguna de ellas, esto demuestra la veracidad del LOG que informa las listas revisadas.
+
 ![](img/parte%202%20punto%202%20ip%20inexistente.PNG)
 
 
 **Parte II.I Para discutir la próxima clase (NO para implementar aún)**
 
-La estrategia de paralelismo antes implementada es ineficiente en ciertos casos, pues la búsqueda se sigue realizando aún cuando los N hilos (en su conjunto) ya hayan encontrado el número mínimo de ocurrencias requeridas para reportar al servidor como malicioso. Cómo se podría modificar la implementación para minimizar el número de consultas en estos casos?, qué elemento nuevo traería esto al problema?
+La estrategia de paralelismo antes implementada es ineficiente en ciertos casos, pues la búsqueda se sigue realizando aún cuando los N hilos (en su conjunto) ya hayan encontrado el número mínimo de ocurrencias requeridas para reportar al servidor como malicioso. ¿Cómo se podría modificar la implementación para minimizar el número de consultas en estos casos? ¿qué elemento nuevo traería esto al problema?
+
+Una estrategia a implementar para la solucion de este problema es el uso de variables de la clase AtomicInteger, las cuales son variables multiproceso con las que se puede llevar la misma cuenta de las ocurrencias del host que se valida entre todos los hilos. Ya que en la anterior implementación se realiza una búsqueda exhaustiva que es innecesaria. 
 
 **Parte III - Evaluación de Desempeño**
 
