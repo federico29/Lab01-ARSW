@@ -147,6 +147,74 @@ Para 'refactorizar' este código, y hacer que explote la capacidad multi-núcleo
 
 1. Cree una clase de tipo Thread que represente el ciclo de vida de un hilo que haga la búsqueda de un segmento del conjunto de servidores disponibles. Agregue a dicha clase un método que permita 'preguntarle' a las instancias del mismo (los hilos) cuantas ocurrencias de servidores maliciosos ha encontrado o encontró.
 
+```java
+package edu.eci.arsw.threads;
+
+import edu.eci.arsw.spamkeywordsdatasource.HostBlacklistsDataSourceFacade;
+import java.util.LinkedList;
+
+public class HostBlackListThread<checkHost> extends Thread {
+    private HostBlacklistsDataSourceFacade skds;
+    private int x;
+    private int y;
+    private String ipaddress;
+    private int occurrencesCount;
+    private LinkedList<Integer> blackListOcurrences;
+    private int checkedListsCount = 0;
+
+    /***
+     * Método constructor de un hilo que hace la búsqueda de una dirección IP dentro de
+     * un segmento del conjunto de servidores disponibles.
+     * @param skds Objeto que contiene la información de todos los servidores disponibles.
+     * @param x Limite inferior del intervalo de servidores que se va a revisar.
+     * @param y Limite superior del intervalo de servidores que se va a revisar.
+     * @param ipaddress Dirección IP que se desea buscar.
+     */
+    public HostBlackListThread(HostBlacklistsDataSourceFacade skds,int x, int y,String ipaddress){
+        this.skds = skds;
+        this.x = x;
+        this.y = y;
+        this.ipaddress = ipaddress;
+        blackListOcurrences = new LinkedList<>();
+    }
+
+    /***
+     * Método para correr el hilo, tiene el ciclo que realizará la busqueda en cada uno de los
+     * servidores del intervalo.
+     */
+    @Override
+    public void run() {
+        for (int i = x; i < y && occurrencesCount < 5; i++) {
+            checkedListsCount++;
+            if (skds.isInBlackListServer(i, ipaddress)) {
+                blackListOcurrences.add(i);
+                occurrencesCount++;
+            }
+        }
+    }
+
+    /***
+     * Retorna el número de veces que la dirección IP se encontró en los servidores dados.
+     * @return El número de ocurrencias de la dirección IP en los servidores dados.
+     */
+    public int getOccurrencesCount() { return occurrencesCount; }
+
+    /***
+     *Retorna el número de listas que se han revisado.
+     * @return El número de listas que se han revisado.
+     */
+    public int getCheckedListsCount(){ return checkedListsCount; }
+
+    /***
+     * Retorna el número que identifica a las listas de servidores donde se tienen ocurrencias de
+     * la dirección IP dada.
+     * @return El número que identifica a las listas de servidores donde se tienen ocurrencias de
+     * la dirección IP dada.
+     */
+    public LinkedList<Integer> getBlackListOccurrences() { return blackListOcurrences; }
+}
+```
+
 2. Agregue al método 'checkHost' un parámetro entero N, correspondiente al número de hilos entre los que se va a realizar la búsqueda (recuerde tener en cuenta si N es par o impar!). Modifique el código de este método para que divida el espacio de búsqueda entre las N partes indicadas, y paralelice la búsqueda a través de N hilos. Haga que dicha función espere hasta que los N hilos terminen de resolver su respectivo sub-problema, agregue las ocurrencias encontradas por cada hilo a la lista que retorna el método, y entonces calcule (sumando el total de ocurrencuas encontradas por cada hilo) si el número de ocurrencias es mayor o igual a _BLACK_LIST_ALARM_COUNT_. Si se da este caso, al final se DEBE reportar el host como confiable o no confiable, y mostrar el listado con los números de las listas negras respectivas. Para lograr este comportamiento de 'espera' revise el método [join](https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html) del API de concurrencia de Java. Tenga también en cuenta:
 
 	* Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
