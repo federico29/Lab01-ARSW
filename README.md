@@ -348,10 +348,21 @@ Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tie
 1. Según la [ley de Amdahls](https://www.pugetsystems.com/labs/articles/Estimating-CPU-Performance-using-Amdahls-Law-619/#WhatisAmdahlsLaw?):
 
 	![](img/ahmdahls.png), donde _S(n)_ es el mejoramiento teórico del desempeño, _P_ la fracción paralelizable del algoritmo, y _n_ el número de hilos, a mayor _n_, mayor debería ser dicha mejora. Por qué el mejor desempeño no se logra con los 500 hilos?, cómo se compara este desempeño cuando se usan 200?. 
+	
+	La ley de Amdahl establece que la mejora incremental en la aceleración conseguida con la mejora de una parte se va reduciendo a medida que se van introduciendo nuevas 	mejoras, es decir, cuando el numero de hilos tienden al infinito el aporte en el tiempo de ejecución al seguir incrementado el numero de hilos se vuelve insignificante.
+	
+2. ¿Cómo se comporta la solución usando tantos hilos de procesamiento como núcleos comparado con el resultado de usar el doble de éste?.
 
-2. Cómo se comporta la solución usando tantos hilos de procesamiento como núcleos comparado con el resultado de usar el doble de éste?.
+	En nuestro caso, utilizando un computador de dos nucleos cuando ejecutamos el programa con 2 hilos, este tarda en ejecutarse 1 minuto con 14 segundos; al usar el doble, es decir, 8 hilos se evidencia que el tiempo es de 37 segundos, concluyendo que se reduce a la mitad.
 
-3. De acuerdo con lo anterior, si para este problema en lugar de 100 hilos en una sola CPU se pudiera usar 1 hilo en cada una de 100 máquinas hipotéticas, la ley de Amdahls se aplicaría mejor?. Si en lugar de esto se usaran c hilos en 100/c máquinas distribuidas (siendo c es el número de núcleos de dichas máquinas), se mejoraría?. Explique su respuesta.
+3. De acuerdo con lo anterior, si para este problema en lugar de 100 hilos en una sola CPU se pudiera usar 1 hilo en cada una de 100 máquinas hipotéticas, la ley de Amdahls se aplicaría mejor?. ¿Si en lugar de esto se usaran c hilos en 100/c máquinas distribuidas (siendo c es el número de núcleos de dichas máquinas), se mejoraría?. Explique su respuesta.
 
+	La ley de Amdahls se aplicaría de una manera menos óptima, ya que no habría una mejora en el desempeño porque al momento de combinar los resultados de cada una de las diferentes máquinas se consumen recursos físicos que provocan una menor eficiencia en nuestro programa.
 
+### Conclusión
 
+Con ayuda de esta tabla donde se presentan los valores obtenidos de las pruebas realizadas en la parte 2 y la mejora en el desempeño de ejecución, se desarrolló la siguiente gráfica:
+
+![](img/grafica.png)
+
+Para finalmente corroborar que aumentando el número de hilos se llega a un límite de procesamiento, donde la mejora en el desempeño se vuelve constante. Esto es limitado por el hardware en que se ejecute el programa ya que cuando la cantidad de hilos excede por más del doble la cantidad de procesadores de la CPU, el tiempo se vuelve constante en vez de reducirse más.
