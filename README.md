@@ -58,6 +58,30 @@ public class CountThread extends Thread{
 ``` 
 2. Complete el método __main__ de la clase CountMainThreads para que:
 	1. Cree 3 hilos de tipo CountThread, asignándole al primero el intervalo [0..99], al segundo [99..199], y al tercero [200..299].
+	```java
+	
+		package edu.eci.arsw.threads;
+		/**
+		 *
+		 * @author hcadavid
+		 */
+		public class CountThreadsMain {
+
+		    public static void main(String a[]){
+			CountThread hilo1 = new CountThread(0,99);
+			CountThread hilo2 = new CountThread(99,199);
+			CountThread hilo3 = new CountThread(200,299);
+
+
+			System.out.println("Utilizando el metodo run():");
+			hilo1.run();
+			hilo2.run();
+			hilo3.run();
+
+		    }
+		}
+
+	```
 	2. Inicie los tres hilos con 'start()'.
 	3. Ejecute y revise la salida por pantalla. 
 	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
