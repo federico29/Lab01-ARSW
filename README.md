@@ -373,4 +373,4 @@ Para finalmente corroborar que aumentando el número de hilos se llega a un lím
 - [Guillermo Alfonso Castro Camelo](https://github.com/memo1019)
 
 ## Licencias
-- Este proyecto está bajo la Licencia GNU General Public License - [LICENSE](/license.txt)
+- Este proyecto está bajo la Licencia GNU General Public License - [LICENSE](/LICENSE.txt)
