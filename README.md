@@ -282,7 +282,15 @@ public List<Integer> checkHost(String ipaddress,int n){
 
 * Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
 
+![](img/parte%202%20punto%202%20ip%20menos%20dispersa.PNG)
+
+![](img/parte%202%20punto%202%20ip%20mas%20dispersa.PNG)
+
 * Se sabe que el HOST 202.24.34.55 está reportado en listas negras de una forma más dispersa, y que el host 212.24.24.55 NO está en ninguna lista negra.
+
+![](img/parte%202%20punto%202%20ip%20mas%20dispersa.PNG)
+
+![](img/parte%202%20punto%202%20ip%20inexistente.PNG)
 
 
 **Parte II.I Para discutir la próxima clase (NO para implementar aún)**
