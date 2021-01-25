@@ -20,7 +20,6 @@
 package edu.eci.arsw.threads;
 
 /**
- *
  * @author Barrios y Castro
  */
 public class CountThread extends Thread{
@@ -62,21 +61,13 @@ public class CountThread extends Thread{
 	package edu.eci.arsw.threads;
 	/**
 	 *
-	 * @author hcadavid
+	 * @author Barrios y Castro
 	 */
 	public class CountThreadsMain {
-
 	    public static void main(String a[]){
 		CountThread hilo1 = new CountThread(0,99);
 		CountThread hilo2 = new CountThread(99,199);
 		CountThread hilo3 = new CountThread(200,299);
-
-
-		System.out.println("Utilizando el metodo run():");
-		hilo1.run();
-		hilo2.run();
-		hilo3.run();
-
 	    }
 	}
 	```
