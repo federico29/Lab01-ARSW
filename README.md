@@ -91,7 +91,7 @@ public class CountThread extends Thread{
 	}
 	```
 	3. Ejecute y revise la salida por pantalla.
-	![](img/parte%201%20punto%202%20iii.png)
+	![](img/parte%201%20punto%202%20iii.PNG)
 	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
 	```java
 	package edu.eci.arsw.threads;
@@ -111,9 +111,9 @@ public class CountThread extends Thread{
 	    }
 	}
 	```
-	![](img/parte%201%20punto%202%20iii.png)
+	![](img/parte%201%20punto%202%20iii.PNG)
 	
-	![](img/parte%201%20punto%202%20iv%20b.png)
+	![](img/parte%201%20punto%202%20iv%20b.PNG)
 **Parte II - Ejercicio Black List Search**
 
 
