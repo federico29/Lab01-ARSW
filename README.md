@@ -366,7 +366,11 @@ Con ayuda de esta tabla donde se presentan los valores obtenidos de las pruebas 
 ![](img/grafica.png)
 
 Para finalmente corroborar que aumentando el número de hilos se llega a un límite de procesamiento, donde la mejora en el desempeño se vuelve constante. Esto es limitado por el hardware en que se ejecute el programa ya que cuando la cantidad de hilos excede por más del doble la cantidad de procesadores de la CPU, el tiempo se vuelve constante en vez de reducirse más.
+## construido con
 
 ## Autores
 - [Federico Barrios Meneses](https://github.com/federico29)
 - [Guillermo Alfonso Castro Camelo](https://github.com/memo1019)
+
+## Licencias
+- Este proyecto está bajo la Licencia GNU General Public License - [LICENSE](/license.txt)
