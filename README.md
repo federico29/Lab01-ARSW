@@ -17,23 +17,42 @@
 
 1. De acuerdo con lo revisado en las lecturas, complete las clases CountThread, para que las mismas definan el ciclo de vida de un hilo que imprima por pantalla los números entre A y B.
 ```java
+package edu.eci.arsw.threads;
+
+/**
+ *
+ * @author Barrios y Castro
+ */
 public class CountThread extends Thread{
     public int a;
     public int b;
 
+    /***
+     * Método constructor de un hilo que cuenta los numero entre a y b.
+     * @param a Entero.
+     * @param b Entero.
+     */
     public CountThread(int a,int b){
-	this.a=a;
-	this.b=b;
+        this.a=a;
+        this.b=b;
     }
 
+    /***
+     * Método para correr el hilo.
+     */
     public void run() {
-	this.showNumbers(this.a, this.b);
+        this.showNumbers(this.a, this.b);
     }
 
+    /***
+     * Método en donde se desarrolla el ciclo para ver los números consecutivos.
+     * @param a Entero.
+     * @param b Entero.
+     */
     public void showNumbers(int a, int b) {
-	for (int i=this.a; i<=this.b; i++) {
-	    System.out.println(i);
-	}
+        for (int i=this.a; i<=this.b; i++) {
+            System.out.println(i);
+        }
     }
 }
 ``` 
