@@ -114,19 +114,19 @@ public class CountThread extends Thread{
 	}
 	```
 	
-	*Output utilizando el método start:*
+	**Output utilizando el método start:**
 	
 	![](img/parte%201%20punto%202%20iii.PNG)
 	
 	Se puede presenciar que al ejecutar el método start se estan iniciando todos los hilos concurrentemente.
 	
-	*Output utilizando el método run:*
+	**Output utilizando el método run:**
 	
 	![](img/parte%201%20punto%202%20iv%20b.PNG)
 	
 	Por otra parte, ejecutando el método run se estan iniciando todos los hilos secuencialmente. Por lo tando hasta que no se termine de ejecutar el primer hilo, no se ejecutará el siguiente.
 	
-	
+	Los dos outputs son diferentes porque al llamar el método run estamos llamando un método como cualquier otro, esto significa como ya lo sustentamos anteriormente que hasta que no termina no se llamará al otro método; por otra parte, el método start ejecuta su procesamiento al mismo tiempo que los otros hilos al inicializarlos.
 	
 	
 **Parte II - Ejercicio Black List Search**
