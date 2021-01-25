@@ -94,7 +94,7 @@ public class CountThread extends Thread{
 	
 	![](img/parte%201%20punto%202%20iii.PNG)
 	
-	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
+	4. Cambie el incio con 'start()' por 'run()'. ¿Cómo cambia la salida? ¿por qué?.
 	```java
 	package edu.eci.arsw.threads;
 	/**
@@ -114,9 +114,19 @@ public class CountThread extends Thread{
 	}
 	```
 	
+	*Output utilizando el método start:*
+	
 	![](img/parte%201%20punto%202%20iii.PNG)
 	
+	Se puede presenciar que al ejecutar el método start se estan iniciando todos los hilos concurrentemente.
+	
+	*Output utilizando el método run:*
+	
 	![](img/parte%201%20punto%202%20iv%20b.PNG)
+	
+	Por otra parte, ejecutando el método run se estan iniciando todos los hilos secuencialmente. Por lo tando hasta que no se termine de ejecutar el primer hilo, no se ejecutará el siguiente.
+	
+	
 	
 	
 **Parte II - Ejercicio Black List Search**
