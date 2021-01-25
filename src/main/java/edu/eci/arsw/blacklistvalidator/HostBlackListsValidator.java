@@ -61,11 +61,15 @@ public class HostBlackListsValidator {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            globalOccurrencesCount = globalOccurrencesCount + hilo.getOccurrencesCount();
-            checkedListsCount= checkedListsCount + hilo.getCheckedListsCount();
-            blackListOccurrences = hilo.getBlackListOccurrences();
-            for(Integer hostList : blackListOccurrences){
-                globalBlackListOccurrences.add(hostList);
+            if (globalOccurrencesCount < BLACK_LIST_ALARM_COUNT){
+                globalOccurrencesCount = globalOccurrencesCount + hilo.getOccurrencesCount();
+                checkedListsCount= checkedListsCount + hilo.getCheckedListsCount();
+                blackListOccurrences = hilo.getBlackListOccurrences();
+                for(Integer hostList : blackListOccurrences){
+                    globalBlackListOccurrences.add(hostList);
+                }
+            }else{
+                break;
             }
         }
 
